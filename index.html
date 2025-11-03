@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Moch. Alfin Burhanudin Alqodri - Calon Magang TI</title>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =================================
+           1. PENGATURAN DASAR & WARNA
+           ================================= */
+        :root {
+            --bg-dark-navy: #0a192f;  /* Latar belakang utama */
+            --text-light-slate: #ccd6f6; /* Teks paragraf */
+            --text-white: #e6f1ff;     /* Teks heading */
+            --accent-green: #64ffda;   /* Aksen (tombol, link, highlight) */
+            --card-light-navy: #112240; /* Warna untuk card proyek */
+            --font-utama: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'Fira Code', 'Roboto Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark-navy);
+            color: var(--text-light-slate);
+            font-family: var(--font-utama);
+            line-height: 1.6;
+            overflow-x: hidden; /* Mencegah scroll horizontal dari AOS */
+        }
+
+        /* CSS untuk Particles.js agar menutupi seluruh layar */
+        #particles-js {
+            position: fixed; /* Menjadikannya tetap di layar */
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Pastikan di belakang konten Anda */
+            background-color: var(--bg-dark-navy);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative; /* Agar konten tetap di atas partikel */
+            z-index: 1;
+        }
+
+        section {
+            padding: 100px 0;
+            min-height: 80vh;
+        }
+
+        h1, h2, h3 {
+            color: var(--text-white);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Animasi garis bawah heading */
+        h2::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background: var(--accent-green);
+            margin-top: 8px;
+            transition: width 0.3s ease-in-out;
+        }
+        
+        h2:hover::after {
+            width: 100%;
+        }
+
+        p {
+            margin-bottom: 15px;
+            max-width: 700px;
+        }
+
+        a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Tombol CTA (Call to Action) */
+        .btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+        }
+
+        /* =================================
+           2. NAVIGASI
+           ================================= */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: all 0.3s ease;
+            background-color: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-green);
+            font-family: var(--font-mono);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        
+        /* Tautan sosial media di navigasi (untuk HRD) */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 1.25rem;
+        }
+        .social-links a {
+            transition: transform 0.3s ease;
+        }
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        /* =================================
+           3. HERO (HALAMAN DEPAN)
+           ================================= */
+        #hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: 100px; /* Offset untuk navbar */
+        }
+
+        #hero h1 {
+            font-size: 1.2rem;
+            color: var(--accent-green);
+            font-family: var(--font-mono);
+            margin-bottom: 15px;
+        }
+
+        #hero .nama-besar {
+            font-size: 4.5rem;
+            color: var(--text-white);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        #hero .jabatan-besar {
+            font-size: 3rem;
+            color: var(--text-light-slate);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        #hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        
+        /* Menyesuaikan ukuran font nama jika terlalu panjang */
+        @media(max-width: 992px) {
+            #hero .nama-besar { font-size: 3.5rem; }
+            #hero .jabatan-besar { font-size: 2.5rem; }
+        }
+        @media(max-width: 768px) {
+            #hero .nama-besar { font-size: 2.5rem; }
+            #hero .jabatan-besar { font-size: 1.8rem; }
+        }
+
+
+        /* =================================
+           4. TENTANG SAYA
+           ================================= */
+        #about .about-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        #about .about-text ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        
+        #about .about-text ul li::before {
+            content: '▹'; /* Animasi panah */
+            color: var(--accent-green);
+            margin-right: 10px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        #about .about-text ul li:hover::before {
+            transform: translateX(5px);
+        }
+
+        #about .about-photo {
+            max-width: 300px;
+            height: 300px;
+            border: 3px solid var(--accent-green);
+            border-radius: 10px;
+            position: relative;
+            background-color: var(--accent-green);
+            transition: transform 0.3s ease;
+        }
+        
+        #about .about-photo:hover {
+            transform: translate(-5px, -5px);
+        }
+        
+        #about .about-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 7px;
+            position: relative;
+            z-index: 1;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+        
+        #about .about-photo:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* =================================
+           5. SKILL / KEMAMPUAN
+           ================================= */
+        #skills .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 2rem;
+            margin-top: 40px;
+            max-width: 800px;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--card-light-navy);
+            padding: 1.5rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-10px);
+            border-bottom-color: var(--accent-green);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .skill-item i {
+            font-size: 3rem;
+            color: var(--accent-green);
+        }
+
+        .skill-item h3 {
+            font-size: 1rem;
+            color: var(--text-white);
+            margin-top: 15px;
+            margin-bottom: 0;
+            font-family: var(--font-mono);
+        }
+
+        /* =================================
+           6. PROYEK
+           ================================= */
+        #projects .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 40px;
+            max-width: 900px; 
+        }
+
+        .project-card {
+            background: var(--card-light-navy);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover .project-image {
+            opacity: 1;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h3 {
+            color: var(--text-white);
+            font-size: 1.4rem;
+        }
+        
+        .project-content p {
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        .project-tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-light-slate);
+            margin-top: 15px;
+        }
+
+        .project-links {
+            margin-top: 15px;
+            font-size: 1.25rem;
+        }
+
+        .project-links a {
+            margin-right: 15px;
+            color: var(--text-light-slate);
+        }
+        
+        .project-links a:hover {
+            color: var(--accent-green);
+        }
+
+        /* =================================
+           7. KONTAK (FITUR MELAMAR MAGANG)
+           ================================= */
+        #contact {
+            text-align: center;
+        }
+
+        #contact h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        #contact p {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        #contact form {
+            max-width: 600px;
+            margin: 40px auto 0 auto;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--card-light-navy);
+            border: 1px solid var(--text-light-slate);
+            border-radius: 5px;
+            color: var(--text-white);
+            font-family: var(--font-utama);
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        /* =================================
+           8. FOOTER
+           ================================= */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-light-slate);
+        }
+        
+        /* =================================
+           9. RESPONSIVE DESIGN (Perbaikan error titik)
+           ================================= */
+        @media(max-width: 768px) {
+            h2 { font-size: 2rem; }
+            
+            nav { padding: 1rem; }
+            nav .logo { display: none; } 
+            nav ul { display: none; } 
+            nav { justify-content: center; }
+
+            #about .about-content {
+                grid-template-columns: 1fr;
+            }
+            #about .about-photo {
+                margin: 0 auto;
+            }
+            
+            #skills .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 1rem;
+            }
+            .skill-item i { font-size: 2.5rem; }
+            .skill-item h3 { font-size: 0.8rem; }
+            
+            #projects .projects-grid {
+                grid-template-columns: 1fr; 
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div id="particles-js"></div>
+
+    <nav>
+        <a href="#" class="logo">MA</a>
+        
+        <ul>
+            <li><a href="#about">01. Tentang</a></li>
+             <li><a href="#skills">02. Skills</a></li>
+             <li><a href="#projects">03. Proyek</a></li>
+             <li><a href="#contact">04. Kontak</a></li>
+        </ul>
+        
+        <div class="social-links">
+            <a href="https://github.com/Alfinnn24" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>            
+            <a href="https://www.linkedin.com/in/moch-alfin-burhanudin-a-97b112390/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>            
+            <a href="mailto:alfin9827@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </nav>
+
+    <header id="hero" class="container">
+        <h1 data-aos="fade-up" data-aos-delay="100">Halo, nama saya</h1>
+        <h2 class="nama-besar" data-aos="fade-up" data-aos-delay="200">
+            Moch. Alfin Burhanudin Alqodri
+        </h2>
+        <h3 class="jabatan-besar" data-aos="fade-up" data-aos-delay="300">
+            Saya seorang <span id="typed-text"></span>
+        </h3>
+        <p data-aos="fade-up" data-aos-delay="400">
+            Saya seorang mahasiswa Teknik Informatika dari Politeknik Negeri Malang yang bersemangat dalam memecahkan masalah melalui kode. Saat ini saya fokus pada pengembangan web, mobile, dan analisis data, serta mencari kesempatan magang untuk berkontribusi.
+        </p>
+        <div data-aos="fade-up" data-aos-delay="500">
+            <a href="#contact" class="btn">Hubungi Saya untuk Tawaran Magang</a>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="about" class="container">
+            <h2 data-aos="fade-right">Tentang Saya</h2>
+            <div class="about-content" data-aos="fade-up">
+                <div class="about-text">
+                    <p>
+                        Halo! Saya seorang mahasiswa TI di Politeknik Negeri Malang. Saya sangat tertarik dengan bagaimana teknologi dapat membangun solusi yang efisien. Dari membuat aplikasi web interaktif, aplikasi mobile, hingga menganalisis data, saya selalu tertantang untuk belajar hal baru.
+                    </p>
+                    <p>
+                        Saya cepat beradaptasi, seorang problem-solver, dan senang bekerja dalam tim. Saya percaya bahwa skill teknis dan soft skill sama pentingnya untuk sukses di industri ini.
+                    </p>
+                    <p>Beberapa teknologi yang sedang saya dalami:</p>
+                    <ul>
+                        <li>Flutter</li>
+                        <li>Python</li>
+                        <li>MySQL</li>
+                        <li>JavaScript</li>
+                        <li>Node.js</li>
+                        <li>Git & GitHub</li>
+                    </ul>
+                </div>
+                <div class="about-photo" data-aos="fade-left">
+                    <img src="alfin.jpg" alt="Foto Profil Moch. Alfin">
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="container">
+            <h2 data-aos="fade-right">Kemampuan Utama Saya</h2>
+            <p data-aos="fade-up">
+                Teknologi dan *tools* yang paling sering saya gunakan dalam proyek-proyek saya.
+            </p>
+            <div class="skills-grid">
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                </div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="150">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3</h3>
+                </div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fab fa-js-square"></i>
+                    <h3>JavaScript</h3>
+                </div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="250">
+                    <i class="fab fa-php"></i>
+                    <h3>PHP</h3>
+                </div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fab fa-laravel"></i>
+                    <h3>Laravel</h3>
+                </div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="350">
+                    <i class="fas fa-mobile-alt"></i> 
+                    <h3>Flutter</h3>
+                </div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                </div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="450">
+                    <i class="fas fa-database"></i>
+                    <h3>MySQL</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="container">
+            <h2 data-aos="fade-right">Proyek Pilihan</h2>
+            <p data-aos="fade-up">Ini adalah bukti kemampuan saya. Lihat kode dan demonya!</p>
+
+            <div class="projects-grid">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://via.placeholder.com/400x250" alt="Proyek Web Laravel" class="project-image">
+                    <div class="project-content">
+                        <h3>Proyek 1 (Contoh: Aplikasi Web Laravel)</h3>
+                        <p>
+                            Deskripsi singkat tentang proyek ini, apa tujuannya, dan apa peran Anda.
+                        </p>
+                        <ul class="project-tech-list">
+                            <li>Laravel</li>
+                            <li>PHP</li>
+                            <li>MySQL</li>
+                            <li>Bootstrap</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" target="_blank" title="Kode GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" target="_blank" title="Demo Live"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://via.placeholder.com/400x250" alt="Proyek Mobile Flutter" class="project-image">
+                    <div class="project-content">
+                        <h3>Proyek 2 (Contoh: Aplikasi Mobile Flutter)</h3>
+                        <p>
+                            Deskripsi proyek kedua. Tunjukkan variasi *skill* Anda.
+                        </p>
+                        <ul class="project-tech-list">
+                            <li>Flutter</li>
+                            <li>Dart</li>
+                            <li>Firebase</li>
+                            <li>API</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" target="_blank" title="Kode GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" target="_blank" title="Demo Live"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://via.placeholder.com/400x250" alt="Sistem Booking Hotel Java" class="project-image">
+                    <div class="project-content">
+                        <h3>Sistem Booking Hotel (Java Desktop/CLI)</h3>
+                        <p>
+                            Aplikasi sistem reservasi hotel desktop (atau console) yang dibangun murni dengan Java, mengimplementasikan konsep OOP dan terhubung ke database MySQL menggunakan JDBC.
+                        </p>
+                        <ul class="project-tech-list">
+                            <li>Java</li>
+                            <li>OOP</li>
+                            <li>JDBC</li>
+                            <li>MySQL</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" target="_blank" title="Kode GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" target="_blank" title="Tonton Demo Video"><i class="fas fa-video"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2 data-aos="fade-up">Tertarik Menerima Saya Magang?</h2>
+            <p data-aos="fade-up" data-aos-delay="100">
+                Saya sangat antusias untuk belajar dan berkontribusi di perusahaan Anda. Silakan unduh CV saya untuk info lebih lengkap, atau kirimkan saya pesan di bawah ini.
+            </p>
+            
+            <a href="#" class="btn" download data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-download"></i> Download CV Saya
+            </a>
+
+            <form action="https://formspree.io/f/mjkaqzwn" method="POST" data-aos="fade-up" data-aos-delay="300">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email Perusahaan" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Pesan Anda (Contoh: 'Kami tertarik untuk interview...')" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-submit">Kirim Pesan</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            Dibuat dengan <i class="fas fa-heart" style="color: var(--accent-green);"></i> oleh Moch. Alfin Burhanudin Alqodri
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <script>
+        // 1. Inisialisasi AOS
+        AOS.init({
+            duration: 1000, // Durasi animasi
+            once: true,     // Animasi hanya terjadi sekali
+            offset: 50      // Memicu animasi sedikit lebih awal
+        });
+
+        // 2. Inisialisasi Typed.js
+        var options = {
+            strings: [
+                'Web Developer.',
+                'Mobile Developer.',
+                'Data Analyst.',
+                'Mahasiswa TI.',
+                'Calon Intern Anda.'
+            ],
+            typeSpeed: 50,  // Kecepatan mengetik
+            backSpeed: 30,  // Kecepatan menghapus
+            backDelay: 1500, // Waktu tunggu sebelum menghapus
+            loop: true      // Mengulang animasi
+        };
+
+        var typed = new Typed('#typed-text', options);
+
+        // 3. Inisialisasi Particles.js
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80, /* Jumlah partikel */
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#64ffda" /* Warna partikel (accent-green) */
+                },
+                "shape": {
+                    "type": "circle", /* Bentuk partikel */
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 3, /* Ukuran partikel */
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true, /* Garis antar partikel */
+                    "distance": 150,
+                    "color": "#64ffda", /* Warna garis */
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3, /* Kecepatan gerakan partikel */
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true, /* Efek saat kursor di atas */
+                        "mode": "grab" /* Mode interaksi: "grab", "bubble", "repulse" */
+                    },
+                    "onclick": {
+                        "enable": true, /* Efek saat diklik */
+                        "mode": "push" /* Mode interaksi: "push", "remove", "bubble", "repulse" */
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8
+                    },
+                    "repulse": {
+                        "distance": 200
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+
+</body>
+</html>
