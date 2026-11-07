@@ -52,21 +52,21 @@ export default function Portfolio() {
   ];
 
   return (
-    <section id="portfolio" className="py-20 relative bg-[#0A0A0A] text-[#F8FAFC]">
-      <div className="section-divider mb-16" />
+    <section id="portfolio" className="py-14 sm:py-20 relative bg-[#0A0A0A] text-[#F8FAFC]">
+      <div className="section-divider mb-12 sm:mb-16" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-7xl">
 
         {/* ======================================================
             1. SELECTED PROJECTS ROW HEADER
             ====================================================== */}
-        <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 sm:pb-6 mb-6 sm:mb-8 border-b border-white/10">
           <h2 className="font-display font-bold text-xl sm:text-2xl text-white tracking-wider uppercase">
             {t.projects.sectionTitle}
           </h2>
           <button
             onClick={() => setSelectedProject(projectsData[0])}
-            className="flex items-center gap-1.5 font-mono text-xs text-[#94A3B8] hover:text-[#DC2626] transition-colors cursor-pointer uppercase tracking-wider"
+            className="flex items-center gap-1.5 font-mono text-xs text-[#94A3B8] hover:text-[#DC2626] transition-colors cursor-pointer uppercase tracking-wider self-start sm:self-auto"
           >
             <span>{t.projects.viewAll}</span>
             <ArrowRight size={14} />
@@ -74,9 +74,9 @@ export default function Portfolio() {
         </div>
 
         {/* ======================================================
-            2. THREE HORIZONTAL PROJECT CARDS (LIKE REFERENCE IMAGE)
+            2. PROJECT CARDS (RESPONSIVE: 1 COL HP, 2 COLS TAB, 3 COLS DESKTOP)
             ====================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-16 sm:mb-20">
           {projectsData.slice(0, 3).map((project, idx) => {
             const num = `0${idx + 1}`;
             const badgeLabel = idx === 0 ? t.projects.academicBadge : idx === 1 ? t.projects.fintechBadge : t.projects.iotBadge;
@@ -84,14 +84,16 @@ export default function Portfolio() {
               <motion.article
                 key={project.id}
                 onClick={() => setSelectedProject(project)}
-                className="group cursor-pointer flex flex-col justify-between"
+                className={`group cursor-pointer flex flex-col justify-between ${
+                  idx === 2 ? 'sm:col-span-2 lg:col-span-1' : ''
+                }`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.15 }}
               >
                 {/* Image Frame */}
-                <div className="relative w-full aspect-[16/10] bg-[#141414] rounded-lg overflow-hidden border border-white/10 mb-4 transition-all duration-500 group-hover:border-[#DC2626]/60 group-hover:shadow-[0_10px_30px_rgba(220,38,38,0.2)]">
+                <div className="relative w-full aspect-[16/10] bg-[#141414] rounded-lg overflow-hidden border border-white/10 mb-3 sm:mb-4 transition-all duration-500 group-hover:border-[#DC2626]/60 group-hover:shadow-[0_10px_30px_rgba(220,38,38,0.2)]">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -101,14 +103,14 @@ export default function Portfolio() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
                   {/* Top Badge */}
-                  <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/75 border border-white/10 font-mono text-[9px] text-white">
+                  <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 px-2 py-0.5 rounded bg-black/75 border border-white/10 font-mono text-[9px] text-white">
                     {badgeLabel}
                   </div>
                 </div>
 
                 {/* Card Footer: Number + Title + Subtitle + Arrow */}
                 <div className="flex items-start justify-between pt-1">
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
                     {/* Red Number 01, 02, 03 */}
                     <span className="font-condensed font-black text-2xl sm:text-3xl text-[#DC2626] leading-none">
                       {num}
@@ -134,47 +136,48 @@ export default function Portfolio() {
         {/* ======================================================
             3. THREE-COLUMN SECTION:
                EDUCATION & SKILLS | WORK PROCESS | CRIMSON QUOTE BOX
+               (1 Col HP, 2 Cols Tab, 3 Cols Desktop)
             ====================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-8 border-t border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 items-stretch pt-6 sm:pt-8 border-t border-white/10">
 
-          {/* COLUMN 1: EDUCATION & SKILLS (4 Cols) */}
-          <div className="lg:col-span-4 flex flex-col justify-between">
+          {/* COLUMN 1: EDUCATION & SKILLS (md:col-span-1, lg:col-span-4) */}
+          <div className="md:col-span-1 lg:col-span-4 flex flex-col justify-between">
             <div>
-              <h3 className="font-display font-bold text-lg text-white tracking-wider uppercase mb-6">
+              <h3 className="font-display font-bold text-base sm:text-lg text-white tracking-wider uppercase mb-5 sm:mb-6">
                 {t.process.eduSkillsTitle}
               </h3>
 
               {/* Subsection: EDUCATION */}
-              <div className="mb-8">
-                <span className="font-mono text-xs font-bold text-[#DC2626] tracking-widest uppercase block mb-4">
+              <div className="mb-6 sm:mb-8">
+                <span className="font-mono text-xs font-bold text-[#DC2626] tracking-widest uppercase block mb-3 sm:mb-4">
                   {t.process.eduSub}
                 </span>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3.5 sm:gap-4">
                   <div className="flex justify-between items-start pb-3 border-b border-white/5">
                     <div>
-                      <h4 className="font-display font-bold text-sm text-white">
+                      <h4 className="font-display font-bold text-xs sm:text-sm text-white">
                         {t.process.edu1Degree}
                       </h4>
-                      <p className="text-xs text-[#94A3B8]">
+                      <p className="text-[11px] sm:text-xs text-[#94A3B8]">
                         {t.process.edu1School}
                       </p>
                     </div>
-                    <span className="font-mono text-xs text-[#DC2626] font-semibold whitespace-nowrap ml-2">
+                    <span className="font-mono text-[11px] sm:text-xs text-[#DC2626] font-semibold whitespace-nowrap ml-2">
                       {t.process.edu1Period}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-start pb-3 border-b border-white/5">
                     <div>
-                      <h4 className="font-display font-bold text-sm text-white">
+                      <h4 className="font-display font-bold text-xs sm:text-sm text-white">
                         {t.process.edu2Degree}
                       </h4>
-                      <p className="text-xs text-[#94A3B8]">
+                      <p className="text-[11px] sm:text-xs text-[#94A3B8]">
                         {t.process.edu2School}
                       </p>
                     </div>
-                    <span className="font-mono text-xs text-[#DC2626] font-semibold whitespace-nowrap ml-2">
+                    <span className="font-mono text-[11px] sm:text-xs text-[#DC2626] font-semibold whitespace-nowrap ml-2">
                       {t.process.edu2Period}
                     </span>
                   </div>
@@ -183,15 +186,15 @@ export default function Portfolio() {
 
               {/* Subsection: SKILLS */}
               <div>
-                <span className="font-mono text-xs font-bold text-[#DC2626] tracking-widest uppercase block mb-4">
+                <span className="font-mono text-xs font-bold text-[#DC2626] tracking-widest uppercase block mb-3 sm:mb-4">
                   {t.process.skillsSub}
                 </span>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {skillBadges.map((skill) => (
                     <span
                       key={skill}
-                      className="px-2.5 py-1 rounded bg-[#141414] border border-white/10 text-[10px] font-mono text-[#F8FAFC] hover:border-[#DC2626] transition-colors cursor-default"
+                      className="px-2 sm:px-2.5 py-1 rounded bg-[#141414] border border-white/10 text-[9px] sm:text-[10px] font-mono text-[#F8FAFC] hover:border-[#DC2626] transition-colors cursor-default"
                     >
                       {skill}
                     </span>
@@ -201,24 +204,24 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* COLUMN 2: WORK PROCESS (4 Cols) */}
-          <div className="lg:col-span-4 flex flex-col">
-            <h3 className="font-display font-bold text-lg text-white tracking-wider uppercase mb-6">
+          {/* COLUMN 2: WORK PROCESS (md:col-span-1, lg:col-span-4) */}
+          <div className="md:col-span-1 lg:col-span-4 flex flex-col">
+            <h3 className="font-display font-bold text-base sm:text-lg text-white tracking-wider uppercase mb-5 sm:mb-6">
               {t.process.processTitle}
             </h3>
 
             {/* Vertical Process Timeline */}
-            <div className="relative flex flex-col gap-5 pl-2">
+            <div className="relative flex flex-col gap-4 sm:gap-5 pl-1 sm:pl-2">
               {/* Connecting Line */}
               <div className="timeline-line" />
 
               {workProcessSteps.map((step) => {
                 const Icon = step.icon;
                 return (
-                  <div key={step.num} className="relative flex items-start gap-4 z-10">
+                  <div key={step.num} className="relative flex items-start gap-3 sm:gap-4 z-10">
                     {/* Circle Node with Number & Icon */}
-                    <div className="w-10 h-10 rounded-full bg-[#111111] border-2 border-[#DC2626] flex items-center justify-center text-[#DC2626] flex-shrink-0 shadow-md">
-                      <Icon size={16} />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#111111] border-2 border-[#DC2626] flex items-center justify-center text-[#DC2626] flex-shrink-0 shadow-md">
+                      <Icon size={14} className="sm:w-4 sm:h-4" />
                     </div>
 
                     {/* Step Content */}
@@ -231,7 +234,7 @@ export default function Portfolio() {
                           {step.title}
                         </h4>
                       </div>
-                      <p className="text-[11px] text-[#94A3B8] leading-relaxed mt-0.5 max-w-xs">
+                      <p className="text-[10px] sm:text-[11px] text-[#94A3B8] leading-relaxed mt-0.5 max-w-xs">
                         {step.desc}
                       </p>
                     </div>
@@ -241,10 +244,10 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* COLUMN 3: CRIMSON QUOTE CARD (4 Cols) */}
-          <div className="lg:col-span-4 flex flex-col">
+          {/* COLUMN 3: CRIMSON QUOTE CARD (md:col-span-2, lg:col-span-4) */}
+          <div className="md:col-span-2 lg:col-span-4 flex flex-col mt-4 sm:mt-0">
             <div
-              className="h-full rounded-2xl p-8 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl"
+              className="h-full rounded-2xl p-6 sm:p-8 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl"
               style={{
                 background: 'linear-gradient(145deg, #7F1D1D 0%, #450A0A 100%)',
                 border: '1px solid rgba(220, 38, 38, 0.4)',
@@ -252,11 +255,11 @@ export default function Portfolio() {
             >
               {/* Giant Quotation Mark */}
               <div>
-                <span className="font-serif text-6xl sm:text-7xl leading-none text-[#EF4444] opacity-80 block mb-2 select-none">
+                <span className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-none text-[#EF4444] opacity-80 block mb-2 select-none">
                   “
                 </span>
 
-                <blockquote className="text-base sm:text-lg font-medium leading-relaxed mb-6 text-[#F8FAFC]">
+                <blockquote className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed mb-6 text-[#F8FAFC]">
                   {t.process.quote}
                 </blockquote>
               </div>
@@ -264,11 +267,11 @@ export default function Portfolio() {
               {/* Signature & Call-to-Action */}
               <div>
                 {/* Handwritten Signature */}
-                <div className="font-handwriting text-3xl sm:text-4xl text-white mb-6 select-none" style={{ transform: 'rotate(-5deg)' }}>
+                <div className="font-handwriting text-3xl sm:text-4xl text-white mb-4 sm:mb-6 select-none" style={{ transform: 'rotate(-5deg)' }}>
                   Alfin
                 </div>
 
-                <div className="pt-4 border-t border-white/20 flex items-center justify-between font-mono text-[11px] tracking-wider uppercase text-white/90">
+                <div className="pt-3 sm:pt-4 border-t border-white/20 flex items-center justify-between font-mono text-[10px] sm:text-[11px] tracking-wider uppercase text-white/90">
                   <span>{t.process.quoteFooter}</span>
                   <span className="text-[#EF4444] text-base">✦</span>
                 </div>
@@ -281,11 +284,11 @@ export default function Portfolio() {
       </div>
 
       {/* ========================================================
-          PROJECT DETAILS MODAL (FULL INTERACTION PRESERVED)
+          PROJECT DETAILS MODAL (RESPONSIVE FOR ALL SCREEN SIZES)
           ======================================================== */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -301,62 +304,63 @@ export default function Portfolio() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.25 }}
-              className="relative w-full max-w-3xl rounded-2xl bg-[#111111] border border-white/20 p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto z-10"
+              className="relative w-full max-w-3xl rounded-2xl bg-[#111111] border border-white/20 p-5 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto z-10"
             >
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-5 right-5 p-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 p-1.5 sm:p-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors cursor-pointer"
+                aria-label="Close modal"
               >
                 <X size={18} />
               </button>
 
-              <div className="mb-6">
-                <span className="px-3 py-1 rounded-full font-mono text-xs font-semibold text-[#DC2626] bg-[#DC2626]/15 border border-[#DC2626]/40 inline-block mb-3">
+              <div className="mb-4 sm:mb-6 pr-8">
+                <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full font-mono text-[10px] sm:text-xs font-semibold text-[#DC2626] bg-[#DC2626]/15 border border-[#DC2626]/40 inline-block mb-2 sm:mb-3">
                   {selectedProject.badge}
                 </span>
-                <h3 className="font-display font-bold text-2xl sm:text-3xl text-white mb-2">
+                <h3 className="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-white mb-1 sm:mb-2">
                   {selectedProject.title}
                 </h3>
-                <p className="font-mono text-xs text-[#94A3B8]">{selectedProject.subtitle}</p>
+                <p className="font-mono text-[11px] sm:text-xs text-[#94A3B8]">{selectedProject.subtitle}</p>
               </div>
 
-              <div className="w-full rounded-xl overflow-hidden mb-6 border border-white/10 shadow-lg">
+              <div className="w-full rounded-xl overflow-hidden mb-5 sm:mb-6 border border-white/10 shadow-lg">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  className="w-full h-auto object-cover max-h-[340px]"
+                  className="w-full h-auto object-cover max-h-[260px] sm:max-h-[340px]"
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                  <div className="flex items-center gap-2 text-[#EF4444] font-display font-bold text-sm mb-2">
-                    <AlertCircle size={16} />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-5 sm:mb-6">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                  <div className="flex items-center gap-2 text-[#EF4444] font-display font-bold text-xs sm:text-sm mb-1.5 sm:mb-2">
+                    <AlertCircle size={15} />
                     <span>{t.projects.modal.problem}</span>
                   </div>
-                  <p className="text-xs text-[#94A3B8] leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-[#94A3B8] leading-relaxed">
                     {selectedProject.problem}
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                  <div className="flex items-center gap-2 text-emerald-400 font-display font-bold text-sm mb-2">
-                    <CheckCircle2 size={16} />
+                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                  <div className="flex items-center gap-2 text-emerald-400 font-display font-bold text-xs sm:text-sm mb-1.5 sm:mb-2">
+                    <CheckCircle2 size={15} />
                     <span>{t.projects.modal.solution}</span>
                   </div>
-                  <p className="text-xs text-[#94A3B8] leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-[#94A3B8] leading-relaxed">
                     {selectedProject.solution}
                   </p>
                 </div>
               </div>
 
-              <div className="mb-6">
-                <h4 className="font-display font-bold text-sm text-white mb-3">
+              <div className="mb-5 sm:mb-6">
+                <h4 className="font-display font-bold text-xs sm:text-sm text-white mb-2 sm:mb-3">
                   {t.projects.modal.features}
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {selectedProject.features?.map((feat, i) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-[#F8FAFC]">
+                    <div key={i} className="flex items-start gap-2 text-[11px] sm:text-xs text-[#F8FAFC]">
                       <CheckCircle2 size={14} className="text-[#DC2626] flex-shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
@@ -364,15 +368,15 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className="mb-8">
-                <h4 className="font-display font-bold text-sm text-white mb-2.5">
+              <div className="mb-6 sm:mb-8">
+                <h4 className="font-display font-bold text-xs sm:text-sm text-white mb-2 sm:mb-2.5">
                   {t.projects.modal.technologies}
                 </h4>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {selectedProject.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 rounded-md font-mono text-xs text-white bg-white/[0.05] border border-white/10"
+                      className="px-2.5 py-1 rounded-md font-mono text-[10px] sm:text-xs text-white bg-white/[0.05] border border-white/10"
                     >
                       {tech}
                     </span>
@@ -380,12 +384,12 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3 pt-4 border-t border-white/10">
                 <a
                   href={selectedProject.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-white/5 border border-white/10 hover:border-[#DC2626] transition-colors flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-white/5 border border-white/10 hover:border-[#DC2626] transition-colors flex items-center justify-center gap-2"
                 >
                   <Github size={15} />
                   <span>{t.projects.modal.sourceCode}</span>
@@ -394,7 +398,7 @@ export default function Portfolio() {
                   href={selectedProject.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-2.5 rounded-full text-xs font-semibold text-white bg-[#DC2626] hover:bg-[#B91C1C] transition-all flex items-center gap-2 shadow-md"
+                  className="px-6 py-2.5 rounded-full text-xs font-semibold text-white bg-[#DC2626] hover:bg-[#B91C1C] transition-all flex items-center justify-center gap-2 shadow-md"
                 >
                   <span>{t.projects.modal.liveDemo}</span>
                   <ExternalLink size={14} />
