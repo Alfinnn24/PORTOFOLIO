@@ -93,7 +93,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 md:px-8 pointer-events-none">
+    <header className="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 md:px-8 pointer-events-none">
       <motion.nav
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -102,21 +102,21 @@ export default function Navbar() {
           'pointer-events-auto w-full max-w-4xl rounded-full',
           'flex items-center justify-between',
           'transition-all duration-300',
-          'bg-[#0D0D0D]/85 backdrop-blur-xl border border-white/10',
+          'bg-[#0D0D0D]/90 backdrop-blur-xl border border-white/10',
           isScrolled
-            ? 'py-2 px-5 shadow-[0_12px_36px_rgba(0,0,0,0.8),0_0_20px_rgba(220,38,38,0.25)] border-[#DC2626]/40'
-            : 'py-2.5 px-6 shadow-[0_6px_25px_rgba(0,0,0,0.6)]',
+            ? 'py-1.5 sm:py-2 px-3 sm:px-5 shadow-[0_12px_36px_rgba(0,0,0,0.8),0_0_20px_rgba(220,38,38,0.25)] border-[#DC2626]/40'
+            : 'py-2 sm:py-2.5 px-3.5 sm:px-6 shadow-[0_6px_25px_rgba(0,0,0,0.6)]',
         ].join(' ')}
       >
         {/* Monogram */}
         <button
           onClick={() => scrollTo('hero')}
-          className="flex items-center gap-2.5 group cursor-pointer focus:outline-none"
+          className="flex items-center gap-2 group cursor-pointer focus:outline-none flex-shrink-0"
         >
-          <div className="w-8 h-8 rounded-full bg-[#DC2626] flex items-center justify-center font-condensed font-black text-sm text-white shadow-[0_0_15px_rgba(220,38,38,0.5)] group-hover:scale-105 transition-transform">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#DC2626] flex items-center justify-center font-condensed font-black text-xs sm:text-sm text-white shadow-[0_0_15px_rgba(220,38,38,0.5)] group-hover:scale-105 transition-transform">
             MA
           </div>
-          <span className="font-display font-bold text-sm text-white tracking-wider group-hover:text-[#DC2626] transition-colors uppercase">
+          <span className="font-display font-bold text-xs sm:text-sm text-white tracking-wider group-hover:text-[#DC2626] transition-colors uppercase">
             ALFIN<span className="text-[#DC2626]">.</span>
           </span>
         </button>
@@ -130,7 +130,7 @@ export default function Navbar() {
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
                 className={[
-                  'relative px-4 py-1.5 text-xs font-mono font-medium rounded-full transition-colors cursor-pointer focus:outline-none uppercase tracking-wider',
+                  'relative px-3.5 lg:px-4 py-1.5 text-xs font-mono font-medium rounded-full transition-colors cursor-pointer focus:outline-none uppercase tracking-wider',
                   active ? 'text-white' : 'text-[#94A3B8] hover:text-[#F8FAFC]',
                 ].join(' ')}
               >
@@ -148,23 +148,23 @@ export default function Navbar() {
         </div>
 
         {/* Right Controls: Language Switcher + Audio + Status + Mobile Drawer */}
-        <div className="flex items-center gap-2 sm:gap-2.5">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Language Switcher Button (ID / EN) */}
           <button
             onClick={toggleLang}
-            className="px-2.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-mono text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer"
+            className="px-2 sm:px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-mono text-[10px] sm:text-xs font-bold flex items-center gap-1 transition-all cursor-pointer"
             title={lang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
           >
-            <Languages size={13} className="text-[#DC2626]" />
+            <Languages size={12} className="text-[#DC2626]" />
             <span className="tracking-wider">{lang === 'id' ? 'ID' : 'EN'}</span>
-            <span className="text-[10px] text-[#94A3B8]">/</span>
-            <span className="text-[10px] text-[#94A3B8]">{lang === 'id' ? 'EN' : 'ID'}</span>
+            <span className="text-[9px] text-[#94A3B8]">/</span>
+            <span className="text-[9px] text-[#94A3B8]">{lang === 'id' ? 'EN' : 'ID'}</span>
           </button>
 
           {/* Sound Ambience Toggle */}
           <button
             onClick={toggleAudio}
-            className={`p-2 rounded-full border transition-all text-xs flex items-center gap-1.5 ${
+            className={`p-1.5 sm:p-2 rounded-full border transition-all text-xs flex items-center gap-1 ${
               isAudioOn
                 ? 'bg-[#DC2626]/20 border-[#DC2626] text-[#EF4444] shadow-[0_0_12px_rgba(220,38,38,0.4)]'
                 : 'bg-white/5 border-white/10 text-[#94A3B8] hover:text-white hover:bg-white/10'
@@ -173,14 +173,14 @@ export default function Navbar() {
             aria-label="Toggle Audio"
           >
             {isAudioOn ? (
-              <Volume2 size={14} className="animate-pulse" />
+              <Volume2 size={13} className="animate-pulse" />
             ) : (
-              <VolumeX size={14} />
+              <VolumeX size={13} />
             )}
           </button>
 
           {/* Internship Status Badge */}
-          <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-mono tracking-wider">
+          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-mono tracking-wider">
             <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-pulse" />
             {t.nav.internBadge}
           </div>
@@ -188,10 +188,10 @@ export default function Navbar() {
           {/* Mobile Hamburger Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-full bg-white/5 border border-white/10 text-[#F8FAFC] hover:bg-white/10 transition-colors focus:outline-none"
+            className="md:hidden p-1.5 sm:p-2 rounded-full bg-white/5 border border-white/10 text-[#F8FAFC] hover:bg-white/10 transition-colors focus:outline-none"
             aria-label="Toggle Menu"
           >
-            {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+            {mobileMenuOpen ? <X size={15} /> : <Menu size={15} />}
           </button>
         </div>
       </motion.nav>
@@ -203,7 +203,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -10, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.97 }}
-            className="pointer-events-auto absolute top-20 left-4 right-4 bg-[#111111]/95 backdrop-blur-2xl border border-white/15 rounded-2xl p-4 shadow-2xl flex flex-col gap-1.5 md:hidden"
+            className="pointer-events-auto absolute top-16 sm:top-20 left-3 right-3 sm:left-4 sm:right-4 bg-[#111111]/95 backdrop-blur-2xl border border-white/15 rounded-2xl p-4 shadow-2xl flex flex-col gap-1.5 md:hidden max-h-[80vh] overflow-y-auto"
           >
             {navItems.map((item, idx) => {
               const active = activeSection === item.id;
