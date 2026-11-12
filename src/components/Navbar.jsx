@@ -108,16 +108,16 @@ export default function Navbar() {
             : 'py-2 sm:py-2.5 px-3.5 sm:px-6 shadow-[0_6px_25px_rgba(0,0,0,0.6)]',
         ].join(' ')}
       >
-        {/* Monogram */}
+        {/* Monogram / Brand Badge */}
         <button
           onClick={() => scrollTo('hero')}
           className="flex items-center gap-2 group cursor-pointer focus:outline-none flex-shrink-0"
         >
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#DC2626] flex items-center justify-center font-condensed font-black text-xs sm:text-sm text-white shadow-[0_0_15px_rgba(220,38,38,0.5)] group-hover:scale-105 transition-transform">
+          <div className="w-8 h-8 rounded-full bg-[#E50914] flex items-center justify-center font-condensed font-black text-xs text-white shadow-[0_0_18px_rgba(229,9,20,0.6)] group-hover:scale-105 transition-transform">
             MA
           </div>
-          <span className="font-display font-bold text-xs sm:text-sm text-white tracking-wider group-hover:text-[#DC2626] transition-colors uppercase">
-            ALFIN<span className="text-[#DC2626]">.</span>
+          <span className="font-display font-black text-xs sm:text-sm text-white tracking-wider group-hover:text-[#E50914] transition-colors uppercase">
+            ALFIN<span className="text-[#E50914]">.</span>
           </span>
         </button>
 
@@ -179,10 +179,10 @@ export default function Navbar() {
             )}
           </button>
 
-          {/* Internship Status Badge */}
-          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-mono tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-pulse" />
-            {t.nav.internBadge}
+          {/* Internship Status Badge (Pulsing Green Pill) */}
+          <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[10px] font-mono tracking-wider shadow-[0_0_12px_rgba(16,185,129,0.2)]">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)] animate-pulse" />
+            <span className="font-semibold">{t.nav.internBadge}</span>
           </div>
 
           {/* Mobile Hamburger Button */}

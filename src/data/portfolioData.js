@@ -6,16 +6,16 @@ export const personalInfo = {
   headlineMain: "My Portfolio",
   roles: [
     "Full Stack Developer",
-    "Web Developer",
     "Creative Developer",
+    "UI/UX Specialist",
     "Tech Enthusiast"
   ],
-  heroDescription: "Berawal dari rasa penasaran terhadap teknologi, saya terus mengeksplorasi dunia pengembangan web, membangun aplikasi digital, dan mengubah ide menjadi solusi nyata. Saya tertarik pada pengembangan sistem informasi, desain antarmuka, dan teknologi interaktif.",
+  heroDescription: "Saya merancang dan membangun pengalaman web dan aplikasi yang berpusat pada pengguna, menggabungkan ketepatan rekayasa perangkat lunak dengan antarmuka kreatif. Berdedikasi pada arsitektur bersih, interaksi yang halus, dan detail yang bernilai nyata.",
   university: "Politeknik Negeri Malang",
   major: "D4 Teknik Informatika",
   status: "Available for Internship & Projects",
   email: "alfin9827@gmail.com",
-  whatsapp: "https://wa.me/6285748982798", // Direct contact
+  whatsapp: "https://wa.me/6285748982798",
   location: "Malang, Jawa Timur, Indonesia",
   websiteUrl: "https://www.alfari.my.id",
   
@@ -79,14 +79,81 @@ export const personalInterests = [
 
 export const projectsData = [
   {
+    id: "monerize",
+    title: "MONERIZE",
+    fullTitle: "Monerize — E-Commerce & Financial App",
+    subtitle: "E-Commerce & Financial App",
+    category: "Mobile & FinTech",
+    badge: "01 • FINTECH APP",
+    image: "/monerize.png",
+    overview: "Aplikasi mobile manajemen keuangan dan pencatatan arus kas pribadi yang menggabungkan kemudahan e-commerce budgeting, kategorisasi transaksi otomatis, dan analisis grafik pengeluaran real-time.",
+    problem: "Banyak mahasiswa dan profesional muda kesulitan mengendalikan pengeluaran harian karena pencatatan manual yang merepotkan dan tidak adanya visualisasi kategori alokasi dana yang mudah dipahami.",
+    solution: "Merancang antarmuka mobile modern dan intuitif berbasis Flutter dengan sinkronisasi cloud Firebase, fitur one-tap transaction input, grafik interaktif, dan notifikasi batas anggaran bulanan.",
+    techStack: ["Flutter", "Dart", "Firebase Firestore", "REST APIs", "Fl Chart"],
+    features: [
+      "Input Transaksi Cepat & Kategorisasi Otomatis Pengeluaran",
+      "Visualisasi Grafik Pie & Bar Real-time Arus Kas",
+      "Sinkronisasi Multi-Device dengan Akun Pengguna Aman",
+      "Peringatan Over-budget dan Ringkasan Tabungan Bulanan"
+    ],
+    githubUrl: "https://github.com/sayevvv/PBL_Mobile.git",
+    liveUrl: "https://github.com/sayevvv/PBL_Mobile.git",
+    featured: true
+  },
+  {
+    id: "operasional",
+    title: "OPERASIONAL",
+    fullTitle: "Operasional — Enterprise Dashboard & Management System",
+    subtitle: "Enterprise Dashboard",
+    category: "Web Application",
+    badge: "02 • ENTERPRISE SYSTEM",
+    image: "/operasional.png",
+    overview: "Sistem dashboard operasional terpadu untuk monitoring alur kerja perusahaan, inventaris aset, pencatatan logistik harian, serta manajemen data multi-departemen secara efisien dan aman.",
+    problem: "Proses tracking operasional dan koordinasi antar divisi sering terkendala komunikasi terpisah dan laporan manual yang rawan kehilangan data dan duplikasi pencatatan berkas.",
+    solution: "Membangun web portal terpusat dengan role-based authorization, visualisasi metrik performa real-time, approval workflow bertingkat, serta otomatisasi pembuatan laporan operasional.",
+    techStack: ["React.js", "Laravel", "Tailwind CSS", "MySQL", "REST APIs"],
+    features: [
+      "Real-time Enterprise Operations Monitoring Dashboard",
+      "Sistem Verifikasi & Approval Bertingkat Multi-User",
+      "Manajemen Aset & Laporan Inventaris Otomatis",
+      "Ekspor Laporan Harian & Bulanan Terintegrasi"
+    ],
+    githubUrl: "https://github.com/Alfinnn24",
+    liveUrl: "https://github.com/Alfinnn24",
+    featured: true
+  },
+  {
+    id: "pkl-umumcsr",
+    title: "PKL & CSR TRACKER",
+    fullTitle: "PKL & CSR Tracker — Public Management & Community System",
+    subtitle: "Public Management System",
+    category: "Public Sector System",
+    badge: "03 • PUBLIC SYSTEM",
+    image: "/pkl-umumcsr.png",
+    overview: "Platform digital terintegrasi untuk pengelolaan, pendaftaran, verifikasi kegiatan Praktik Kerja Lapangan (PKL), serta monitoring program Corporate Social Responsibility (CSR) masyarakat secara transparan.",
+    problem: "Pencatatan program pengabdian, tracking kegiatan magang/PKL, dan penyaluran program CSR masih manual dan sulit diaudit perkembangannya oleh instansi terkait.",
+    solution: "Mengembangkan aplikasi manajemen publik berbasis web dengan alur pendaftaran peserta terstruktur, timeline monitoring real-time, dan dokumentasi laporan kegiatan yang terpusat.",
+    techStack: ["Laravel", "PHP", "Bootstrap 5", "MySQL", "JavaScript"],
+    features: [
+      "Portal Pendaftaran & Verifikasi Peserta PKL Terpusat",
+      "Tracking Real-time Milestone Progres CSR Komunitas",
+      "Dokumentasi Laporan Lapangan & Upload Bukti Kegiatan",
+      "Dashboard Rekapitulasi Data Peserta & Mitra Publik"
+    ],
+    githubUrl: "https://github.com/Alfinnn24",
+    liveUrl: "https://github.com/Alfinnn24",
+    featured: true
+  },
+  {
     id: "presma",
-    title: "PBL Pencatatan Prestasi Mahasiswa (PRESMA)",
-    subtitle: "Project-Based Learning • Web Application",
-    category: "Web System",
-    badge: "INSTITUTIONAL SYSTEM",
+    title: "PORTAL PRESMA",
+    fullTitle: "Portal PRESMA — Student Achievement Platform",
+    subtitle: "Student Achievement Platform",
+    category: "Academic System",
+    badge: "04 • ACADEMIC PORTAL",
     image: "/presma.png",
     overview: "Sistem informasi berbasis web yang dirancang untuk memfasilitasi pencatatan, verifikasi bertingkat, dan rekapitulasi data prestasi akademik maupun non-akademik mahasiswa di lingkungan perguruan tinggi secara terpusat.",
-    problem: "Sebelumnya, proses pelaporan dan verifikasi prestasi mahasiswa masih dilakukan secara manual menggunakan spreadsheet dan formulir fisik terpisah, mengakibatkan keterlambatan verifikasi data, redundansi berkas bukti, dan kesulitan rekapitulasi untuk akreditasi kampus.",
+    problem: "Sebelumnya, proses pelaporan dan verifikasi prestasi mahasiswa masih dilakukan secara manual menggunakan spreadsheet dan formulir fisik, mengakibatkan keterlambatan verifikasi dan redundansi berkas.",
     solution: "Membangun platform terpusat berbasis Laravel dengan otentikasi multi-level (Mahasiswa, Dosen Pembina, Admin Jurusan), sistem upload bukti berkas terenkripsi, status approval real-time, dan ekspor laporan rekapitulasi otomatis.",
     techStack: ["Laravel 10", "PHP", "MySQL", "Bootstrap 5", "SCSS", "Blade Engine"],
     features: [
@@ -100,35 +167,15 @@ export const projectsData = [
     featured: true
   },
   {
-    id: "monerize",
-    title: "Monerize (Money Categorizer Mobile App)",
-    subtitle: "Mobile App Development • FinTech & Personal Budget",
-    category: "Mobile App",
-    badge: "CROSS-PLATFORM APP",
-    image: "/monerize.png",
-    overview: "Aplikasi mobile manajemen keuangan yang membantu pengguna mencatat arus kas, melacak pengeluaran harian, dan mengelompokkan anggaran secara cerdas dengan antarmuka yang bersih serta visualisasi data yang responsif.",
-    problem: "Banyak mahasiswa dan profesional muda kesulitan mengendalikan pengeluaran harian karena pencatatan manual yang merepotkan dan tidak adanya visualisasi kategori alokasi dana yang mudah dipahami dalam satu tampilan.",
-    solution: "Merancang antarmuka mobile intuitif berbasis Flutter dengan sinkronisasi cloud Firebase. Menyediakan fitur one-tap transaction input, diagram interaktif pengeluaran, peringatan batas anggaran bulanan, dan histori transaksi terfilter.",
-    techStack: ["Flutter", "Dart", "Firebase Firestore", "REST APIs", "Fl Chart"],
-    features: [
-      "Input Transaksi Cepat & Kategorisasi Otomatis (Food, Study, Tech, dll)",
-      "Visualisasi Grafik Pie & Bar Real-time Arus Kas",
-      "Sinkronisasi Data Multi-Device dengan Akun Pengguna Aman",
-      "Peringatan Over-budget dan Ringkasan Tabungan Bulanan"
-    ],
-    githubUrl: "https://github.com/sayevvv/PBL_Mobile.git",
-    liveUrl: "https://github.com/sayevvv/PBL_Mobile.git",
-    featured: true
-  },
-  {
     id: "smartclass",
-    title: "Smart Classroom Availability System (SmartClass)",
-    subtitle: "IoT & Full-Stack • Real-time Monitoring Dashboard",
-    category: "IoT & Web",
-    badge: "IOT & EMBEDDED SYSTEM",
+    title: "SMART CLASS",
+    fullTitle: "SmartClass — EdTech & Smart IoT Platform",
+    subtitle: "EdTech Platform",
+    category: "IoT & EdTech",
+    badge: "05 • IOT & EDTECH",
     image: "/smartclass.png",
-    overview: "Sistem cerdas pemantauan ketersediaan dan okupansi ruang kelas secara real-time. Mengintegrasikan mikrokontroler ESP32 dengan sensor PIR, DHT, dan IR untuk kalkulasi jumlah mahasiswa, deteksi keberadaan, serta otomatisasi efisiensi energi.",
-    problem: "Sering terjadi jadwal bentrok, ketidaktahuan mahasiswa tentang ruangan kosong yang bisa digunakan untuk belajar kelompok, serta pemborosan listrik akibat lampu dan AC yang terus menyala di ruang kelas tak berpenghuni.",
+    overview: "Sistem cerdas pemantauan ketersediaan dan okupansi ruang kelas secara real-time. Mengintegrasikan mikrokontroler ESP32 dengan sensor PIR, DHT, dan IR untuk kalkulasi jumlah mahasiswa, deteksi keberadaan, serta otomatisasi efisiensi energi kampus.",
+    problem: "Sering terjadi jadwal bentrok, ketidaktahuan mahasiswa tentang ruangan kosong yang bisa digunakan untuk belajar kelompok, serta pemborosan energi listrik di ruang kelas tak berpenghuni.",
     solution: "Mengembangkan rangkaian mikrokontroler terhubung Wi-Fi berbasis ESP32 yang mendeteksi kehadiran gerak dan suhu ruangan, mengirimkan data sensor ke Firebase, dan menampilkannya di dashboard web responsif secara real-time.",
     techStack: ["React.js", "Node.js", "ESP32", "C++", "Firebase Realtime DB", "PIR & DHT11 Sensors"],
     features: [
@@ -227,6 +274,6 @@ export const spotifyConfig = {
   title: "A Little Music.",
   subtitle: "A Lot of Ideas.",
   description: "Musik yang menemani proses saya mengubah ide menjadi sesuatu yang nyata. Berikut playlist yang sering saya dengarkan saat coding, eksplorasi arsitektur perangkat lunak, dan membedah logika algoritma.",
-  playlistEmbedUrl: "https://open.spotify.com/embed/playlist/37i9dQZF1DXdLEN7aqioXM?utm_source=generator&theme=0", // Official Lo-Fi Beats
+  playlistEmbedUrl: "https://open.spotify.com/embed/playlist/37i9dQZF1DXdLEN7aqioXM?utm_source=generator&theme=0",
   spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DXdLEN7aqioXM"
 };

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, Search, Lightbulb, PenTool, Code2, Rocket, 
-  X, Github, ExternalLink, AlertCircle, CheckCircle2 
+  X, Minus, Square, Github, ExternalLink, AlertCircle, CheckCircle2, Sparkles, Radio
 } from 'lucide-react';
 import { projectsData } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
+import HolographicProjectCard from './HolographicProjectCard';
 
 export default function Portfolio() {
   const { t } = useLanguage();
@@ -45,28 +46,44 @@ export default function Portfolio() {
   ];
 
   const skillBadges = [
-    'REACT.JS', 'LARAVEL', 'TAILWIND CSS', 'FLUTTER',
-    'PHP', 'MYSQL', 'ESP32 IOT', 'JAVASCRIPT',
-    'DART', 'NODE.JS', 'GIT / GITHUB', 'REST APIS',
-    'FIGMA', 'VITE', 'POSTMAN', 'SUPABASE'
+    'WEB DESIGN', 'UI/UX', 'REACT', 'NEXT.JS',
+    'TAILWIND CSS', 'GSAP ANIMATION', 'PYTHON', 'GIT',
+    'HTML/CSS', 'LARAVEL', 'FLUTTER', 'MYSQL',
+    'NODE.JS', 'REST APIS', 'FIGMA', 'VITE'
   ];
 
   return (
-    <section id="portfolio" className="py-14 sm:py-20 relative bg-[#0A0A0A] text-[#F8FAFC]">
+    <section id="portfolio" className="py-14 sm:py-20 relative bg-[#080808] text-[#F8FAFC] overflow-hidden">
+      {/* Cyber spatial hologram ambient background */}
+      <div
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[850px] h-[500px] rounded-full pointer-events-none opacity-20 filter blur-[140px]"
+        style={{
+          background: 'radial-gradient(circle, #38BDF8 0%, #E50914 45%, transparent 70%)',
+        }}
+      />
+
       <div className="section-divider mb-12 sm:mb-16" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-7xl relative z-10">
 
         {/* ======================================================
-            1. SELECTED PROJECTS ROW HEADER
+            1. SELECTED PROJECTS ROW HEADER (SPATIAL HOLOGRAM THEME)
             ====================================================== */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 sm:pb-6 mb-6 sm:mb-8 border-b border-white/10">
-          <h2 className="font-display font-bold text-xl sm:text-2xl text-white tracking-wider uppercase">
-            {t.projects.sectionTitle}
-          </h2>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 sm:pb-6 mb-8 sm:mb-10 border-b border-white/10">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full font-mono text-[10px] font-semibold tracking-wider text-cyan-400 bg-cyan-400/10 border border-cyan-400/30 mb-2">
+              <Radio size={12} className="animate-pulse" />
+              <span>3D SPATIAL HOLOGRAM INTERFACE</span>
+            </div>
+            <h2 className="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-white tracking-wider uppercase flex items-center gap-2">
+              <span>{t.projects.sectionTitle}</span>
+              <Sparkles size={18} className="text-[#E50914]" />
+            </h2>
+          </div>
+
           <button
             onClick={() => setSelectedProject(projectsData[0])}
-            className="flex items-center gap-1.5 font-mono text-xs text-[#94A3B8] hover:text-[#DC2626] transition-colors cursor-pointer uppercase tracking-wider self-start sm:self-auto"
+            className="flex items-center gap-1.5 font-mono text-xs text-cyan-300 hover:text-white px-4 py-2 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/30 transition-all cursor-pointer uppercase tracking-wider self-start sm:self-auto shadow-[0_0_15px_rgba(34,211,238,0.2)]"
           >
             <span>{t.projects.viewAll}</span>
             <ArrowRight size={14} />
@@ -74,63 +91,33 @@ export default function Portfolio() {
         </div>
 
         {/* ======================================================
-            2. PROJECT CARDS (RESPONSIVE: 1 COL HP, 2 COLS TAB, 3 COLS DESKTOP)
+            2. HOLOGRAPHIC 3D FLOATING PROJECT CARDS (5 PROJECTS)
+               Row 1: 01 MONERIZE, 02 OPERASIONAL, 03 PKL & CSR TRACKER
+               Row 2: 04 PORTAL PRESMA, 05 SMART CLASS
+               Featuring: 3D Mouse Parallax, - [] X Hologram Windows & Sub-HUDs
             ====================================================== */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-16 sm:mb-20">
-          {projectsData.slice(0, 3).map((project, idx) => {
-            const num = `0${idx + 1}`;
-            const badgeLabel = idx === 0 ? t.projects.academicBadge : idx === 1 ? t.projects.fintechBadge : t.projects.iotBadge;
-            return (
-              <motion.article
-                key={project.id}
-                onClick={() => setSelectedProject(project)}
-                className={`group cursor-pointer flex flex-col justify-between ${
-                  idx === 2 ? 'sm:col-span-2 lg:col-span-1' : ''
-                }`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
-              >
-                {/* Image Frame */}
-                <div className="relative w-full aspect-[16/10] bg-[#141414] rounded-lg overflow-hidden border border-white/10 mb-3 sm:mb-4 transition-all duration-500 group-hover:border-[#DC2626]/60 group-hover:shadow-[0_10px_30px_rgba(220,38,38,0.2)]">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover object-center filter brightness-95 contrast-105 transition-transform duration-700 group-hover:scale-105"
-                  />
-                  {/* Subtle Dark Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+        {/* Top Row: 3 Projects */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mb-6 sm:mb-7">
+          {projectsData.slice(0, 3).map((project, idx) => (
+            <HolographicProjectCard
+              key={project.id}
+              project={project}
+              index={idx + 1}
+              onSelect={setSelectedProject}
+            />
+          ))}
+        </div>
 
-                  {/* Top Badge */}
-                  <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 px-2 py-0.5 rounded bg-black/75 border border-white/10 font-mono text-[9px] text-white">
-                    {badgeLabel}
-                  </div>
-                </div>
-
-                {/* Card Footer: Number + Title + Subtitle + Arrow */}
-                <div className="flex items-start justify-between pt-1">
-                  <div className="flex items-start gap-2.5 sm:gap-3">
-                    {/* Red Number 01, 02, 03 */}
-                    <span className="font-condensed font-black text-2xl sm:text-3xl text-[#DC2626] leading-none">
-                      {num}
-                    </span>
-                    <div>
-                      <h3 className="font-display font-bold text-sm sm:text-base text-white tracking-wide uppercase group-hover:text-[#DC2626] transition-colors">
-                        {project.id === 'presma' ? 'PBL PRESMA' : project.id === 'monerize' ? 'MONERIZE' : 'SMARTCLASS'}
-                      </h3>
-                      <p className="font-mono text-[10px] text-[#94A3B8] uppercase tracking-wider">
-                        {badgeLabel}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Arrow Indicator */}
-                  <ArrowRight size={16} className="text-[#94A3B8] group-hover:text-[#DC2626] group-hover:translate-x-1 transition-all mt-1" />
-                </div>
-              </motion.article>
-            );
-          })}
+        {/* Bottom Row: 2 Projects (Centered on Desktop) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto gap-6 sm:gap-7 mb-16 sm:mb-20">
+          {projectsData.slice(3, 5).map((project, idx) => (
+            <HolographicProjectCard
+              key={project.id}
+              project={project}
+              index={idx + 4}
+              onSelect={setSelectedProject}
+            />
+          ))}
         </div>
 
         {/* ======================================================
@@ -266,9 +253,14 @@ export default function Portfolio() {
 
               {/* Signature & Call-to-Action */}
               <div>
-                {/* Handwritten Signature */}
-                <div className="font-handwriting text-3xl sm:text-4xl text-white mb-4 sm:mb-6 select-none" style={{ transform: 'rotate(-5deg)' }}>
-                  Alfin
+                {/* Handwritten Signature & Name */}
+                <div className="mb-4 sm:mb-6 select-none">
+                  <div className="font-handwriting text-2xl sm:text-3xl text-white inline-block" style={{ transform: 'rotate(-3deg)' }}>
+                    Moch Alfin B.
+                  </div>
+                  <div className="font-mono text-[10px] text-white/70 tracking-wider uppercase mt-1">
+                    Moch Alfin Burhanudin A.
+                  </div>
                 </div>
 
                 <div className="pt-3 sm:pt-4 border-t border-white/20 flex items-center justify-between font-mono text-[10px] sm:text-[11px] tracking-wider uppercase text-white/90">
@@ -298,24 +290,40 @@ export default function Portfolio() {
               className="fixed inset-0 bg-black/85 backdrop-blur-md"
             />
 
-            {/* Modal Dialog */}
+            {/* Holographic Modal Dialog */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.93, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.25 }}
-              className="relative w-full max-w-3xl rounded-2xl bg-[#111111] border border-white/20 p-5 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto z-10"
+              exit={{ opacity: 0, scale: 0.93, y: 30 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-3xl rounded-2xl bg-[#0d0d0d]/95 backdrop-blur-2xl border border-cyan-400/40 p-5 sm:p-8 shadow-[0_0_60px_rgba(34,211,238,0.25),0_25px_70px_rgba(0,0,0,0.95)] max-h-[90vh] overflow-y-auto z-10"
             >
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 sm:top-5 sm:right-5 p-1.5 sm:p-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors cursor-pointer"
-                aria-label="Close modal"
-              >
-                <X size={18} />
-              </button>
+              {/* Holographic Top Control Bar */}
+              <div className="flex items-center justify-between pb-3 mb-4 sm:mb-5 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#E50914] shadow-[0_0_8px_rgba(229,9,20,0.8)] animate-pulse" />
+                  <span className="font-mono text-xs text-cyan-300 font-bold tracking-wider">
+                    // SYS_HOLOGRAM_VIEWER : {selectedProject.id}.exe
+                  </span>
+                </div>
 
-              <div className="mb-4 sm:mb-6 pr-8">
-                <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full font-mono text-[10px] sm:text-xs font-semibold text-[#DC2626] bg-[#DC2626]/15 border border-[#DC2626]/40 inline-block mb-2 sm:mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="hidden sm:flex items-center gap-1.5 text-white/50 pr-2 border-r border-white/10">
+                    <button className="p-1 hover:text-white"><Minus size={13} /></button>
+                    <button className="p-1 hover:text-white"><Square size={11} /></button>
+                  </div>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="p-1.5 sm:p-2 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500/20 hover:text-white transition-colors cursor-pointer"
+                    aria-label="Close modal"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+              </div>
+
+              <div className="mb-4 sm:mb-6">
+                <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full font-mono text-[10px] sm:text-xs font-semibold text-cyan-300 bg-cyan-400/10 border border-cyan-400/30 inline-block mb-2 sm:mb-3">
                   {selectedProject.badge}
                 </span>
                 <h3 className="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-white mb-1 sm:mb-2">
@@ -324,12 +332,13 @@ export default function Portfolio() {
                 <p className="font-mono text-[11px] sm:text-xs text-[#94A3B8]">{selectedProject.subtitle}</p>
               </div>
 
-              <div className="w-full rounded-xl overflow-hidden mb-5 sm:mb-6 border border-white/10 shadow-lg">
+              <div className="relative w-full rounded-xl overflow-hidden mb-5 sm:mb-6 border border-white/10 shadow-lg">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   className="w-full h-auto object-cover max-h-[260px] sm:max-h-[340px]"
                 />
+                <div className="holo-scanline" />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-5 sm:mb-6">
