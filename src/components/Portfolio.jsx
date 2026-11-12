@@ -45,11 +45,64 @@ export default function Portfolio() {
   ];
 
   const skillBadges = [
-    'REACT.JS', 'LARAVEL', 'TAILWIND CSS', 'FLUTTER',
-    'PHP', 'MYSQL', 'ESP32 IOT', 'JAVASCRIPT',
-    'DART', 'NODE.JS', 'GIT / GITHUB', 'REST APIS',
-    'FIGMA', 'VITE', 'POSTMAN', 'SUPABASE'
+    'WEB DESIGN', 'UI/UX', 'REACT', 'NEXT.JS',
+    'TAILWIND CSS', 'GSAP ANIMATION', 'PYTHON', 'GIT',
+    'HTML/CSS', 'LARAVEL', 'FLUTTER', 'MYSQL',
+    'NODE.JS', 'REST APIS', 'FIGMA', 'VITE'
   ];
+
+  const renderProjectCard = (project, idx) => {
+    const num = `0${idx + 1}`;
+    return (
+      <motion.article
+        key={project.id}
+        onClick={() => setSelectedProject(project)}
+        className="group cursor-pointer flex flex-col justify-between"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: idx * 0.1 }}
+        whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      >
+        {/* Image Frame */}
+        <div className="relative w-full aspect-[16/10] bg-[#141414] rounded-xl overflow-hidden border border-white/10 mb-3 sm:mb-4 transition-all duration-500 group-hover:border-[#E50914]/60 group-hover:shadow-[0_12px_36px_rgba(229,9,20,0.25)]">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover object-top filter brightness-95 contrast-105 transition-transform duration-700 group-hover:scale-105"
+          />
+          {/* Subtle Dark Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
+
+          {/* Top Badge */}
+          <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-black/80 backdrop-blur-md border border-white/15 font-mono text-[9px] text-[#E50914] font-semibold tracking-wider uppercase">
+            {project.badge || project.category}
+          </div>
+        </div>
+
+        {/* Card Footer: Number + Title + Subtitle + Arrow */}
+        <div className="flex items-start justify-between pt-1">
+          <div className="flex items-start gap-3">
+            {/* Red Number 01, 02, 03, 04, 05 */}
+            <span className="font-condensed font-black text-2xl sm:text-3xl text-[#E50914] leading-none">
+              {num}
+            </span>
+            <div>
+              <h3 className="font-display font-bold text-sm sm:text-base text-white tracking-wide uppercase group-hover:text-[#E50914] transition-colors">
+                {project.title}
+              </h3>
+              <p className="font-mono text-[10px] text-[#94A3B8] uppercase tracking-wider">
+                {project.subtitle || project.category}
+              </p>
+            </div>
+          </div>
+
+          {/* Arrow Indicator */}
+          <ArrowRight size={16} className="text-[#94A3B8] group-hover:text-[#E50914] group-hover:translate-x-1 transition-all mt-1 flex-shrink-0" />
+        </div>
+      </motion.article>
+    );
+  };
 
   return (
     <section id="portfolio" className="py-14 sm:py-20 relative bg-[#0A0A0A] text-[#F8FAFC]">
@@ -74,63 +127,18 @@ export default function Portfolio() {
         </div>
 
         {/* ======================================================
-            2. PROJECT CARDS (RESPONSIVE: 1 COL HP, 2 COLS TAB, 3 COLS DESKTOP)
+            2. PROJECT CARDS (5 NUMBERED CARDS EXACT REPLICA)
+               Row 1: 01 MONERIZE, 02 OPERASIONAL, 03 PKL & CSR TRACKER
+               Row 2: 04 PORTAL PRESMA, 05 SMART CLASS
             ====================================================== */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-16 sm:mb-20">
-          {projectsData.slice(0, 3).map((project, idx) => {
-            const num = `0${idx + 1}`;
-            const badgeLabel = idx === 0 ? t.projects.academicBadge : idx === 1 ? t.projects.fintechBadge : t.projects.iotBadge;
-            return (
-              <motion.article
-                key={project.id}
-                onClick={() => setSelectedProject(project)}
-                className={`group cursor-pointer flex flex-col justify-between ${
-                  idx === 2 ? 'sm:col-span-2 lg:col-span-1' : ''
-                }`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
-              >
-                {/* Image Frame */}
-                <div className="relative w-full aspect-[16/10] bg-[#141414] rounded-lg overflow-hidden border border-white/10 mb-3 sm:mb-4 transition-all duration-500 group-hover:border-[#DC2626]/60 group-hover:shadow-[0_10px_30px_rgba(220,38,38,0.2)]">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover object-center filter brightness-95 contrast-105 transition-transform duration-700 group-hover:scale-105"
-                  />
-                  {/* Subtle Dark Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+        {/* Top Row: 3 Projects */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-5 sm:mb-6">
+          {projectsData.slice(0, 3).map((project, idx) => renderProjectCard(project, idx))}
+        </div>
 
-                  {/* Top Badge */}
-                  <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 px-2 py-0.5 rounded bg-black/75 border border-white/10 font-mono text-[9px] text-white">
-                    {badgeLabel}
-                  </div>
-                </div>
-
-                {/* Card Footer: Number + Title + Subtitle + Arrow */}
-                <div className="flex items-start justify-between pt-1">
-                  <div className="flex items-start gap-2.5 sm:gap-3">
-                    {/* Red Number 01, 02, 03 */}
-                    <span className="font-condensed font-black text-2xl sm:text-3xl text-[#DC2626] leading-none">
-                      {num}
-                    </span>
-                    <div>
-                      <h3 className="font-display font-bold text-sm sm:text-base text-white tracking-wide uppercase group-hover:text-[#DC2626] transition-colors">
-                        {project.id === 'presma' ? 'PBL PRESMA' : project.id === 'monerize' ? 'MONERIZE' : 'SMARTCLASS'}
-                      </h3>
-                      <p className="font-mono text-[10px] text-[#94A3B8] uppercase tracking-wider">
-                        {badgeLabel}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Arrow Indicator */}
-                  <ArrowRight size={16} className="text-[#94A3B8] group-hover:text-[#DC2626] group-hover:translate-x-1 transition-all mt-1" />
-                </div>
-              </motion.article>
-            );
-          })}
+        {/* Bottom Row: 2 Projects (Centered on Desktop) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto gap-5 sm:gap-6 mb-16 sm:mb-20">
+          {projectsData.slice(3, 5).map((project, idx) => renderProjectCard(project, idx + 3))}
         </div>
 
         {/* ======================================================
@@ -266,9 +274,14 @@ export default function Portfolio() {
 
               {/* Signature & Call-to-Action */}
               <div>
-                {/* Handwritten Signature */}
-                <div className="font-handwriting text-3xl sm:text-4xl text-white mb-4 sm:mb-6 select-none" style={{ transform: 'rotate(-5deg)' }}>
-                  Alfin
+                {/* Handwritten Signature & Name */}
+                <div className="mb-4 sm:mb-6 select-none">
+                  <div className="font-handwriting text-2xl sm:text-3xl text-white inline-block" style={{ transform: 'rotate(-3deg)' }}>
+                    Moch Alfin B.
+                  </div>
+                  <div className="font-mono text-[10px] text-white/70 tracking-wider uppercase mt-1">
+                    Moch Alfin Burhanudin A.
+                  </div>
                 </div>
 
                 <div className="pt-3 sm:pt-4 border-t border-white/20 flex items-center justify-between font-mono text-[10px] sm:text-[11px] tracking-wider uppercase text-white/90">
